@@ -11,13 +11,13 @@ class Cage < ApplicationRecord
   validates :maximum_capacity, presence: true
 
   def dinosaur_count
-    self.dinosaurs.size
+    dinosaurs.size
   end
 
   private
 
   def check_for_dinosaurs
-    if self.down? && self.dinosaur_count > 0
+    if down? && dinosaur_count > 0
       raise ExceptionHandler::CustomValidationError, 'Cannot be powered down if cage contains dinosaur(s).'
     end
   end

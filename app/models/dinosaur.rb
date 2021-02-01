@@ -8,8 +8,8 @@ class Dinosaur < ApplicationRecord
 
   belongs_to :cage
 
-  CARNIVORES = %w(tyrannosaurus velociraptor spinosaurus megalosaurus)
-  HERBIVORES = %w(brachiosaurus stegosaurus ankylosaurus triceratops)
+  CARNIVORES = %w[tyrannosaurus velociraptor spinosaurus megalosaurus]
+  HERBIVORES = %w[brachiosaurus stegosaurus ankylosaurus triceratops]
   SPECIES = CARNIVORES + HERBIVORES
 
   validates :name, presence: true
@@ -22,15 +22,13 @@ class Dinosaur < ApplicationRecord
   end
 
   def ensure_active_cage
-    cage = Cage.find(self.cage_id)
-    if cage.down?
-      raise ExceptionHandler::CustomValidationError, 'Cannot be added to cage that is powered down.'
-    end
+    cage = Cage.find(cage_id)
+    raise ExceptionHandler::CustomValidationError, 'Cannot be added to cage that is powered down.' if cage.down?
   end
 
   def check_maximum_capacity
-    cage = Cage.find(self.cage_id)
-    current_inhabitant_count = Dinosaur.where(cage_id: self.cage_id).size
+    cage = Cage.find(cage_id)
+    current_inhabitant_count = Dinosaur.where(cage_id: cage_id).size
     if cage.maximum_capacity == current_inhabitant_count
       raise ExceptionHandler::CustomValidationError, 'Cage at maximum capacity.'
     end
@@ -45,9 +43,9 @@ class Dinosaur < ApplicationRecord
   end
 
   def check_compatible_species
-    current_inhabitants = Dinosaur.where(cage_id: self.cage_id)
+    current_inhabitants = Dinosaur.where(cage_id: cage_id)
     dinosaur_type = get_type(self).first
-    dinosaur_species = self.species
+    dinosaur_species = species
     if current_inhabitants.size > 0
       if dinosaur_type == 'herbivore'
         current_types = get_type(current_inhabitants)
@@ -57,7 +55,8 @@ class Dinosaur < ApplicationRecord
       else
         current_unique_species = current_inhabitants.map(&:species).uniq
         if current_unique_species.first != dinosaur_species
-          raise ExceptionHandler::CustomValidationError, 'Carnivores can only be in a cage with Dinosaurs of the same species.'
+          raise ExceptionHandler::CustomValidationError,
+                'Carnivores can only be in a cage with Dinosaurs of the same species.'
         end
       end
     end

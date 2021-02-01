@@ -64,10 +64,12 @@ RSpec.describe 'Dinosaur specs', type: :request do
     end
 
     context 'when the species is unsupported' do
-      before { post '/api/v1/dinosaurs',
-        params: { name: 'invalid_dino',
-                  species: 'unsupported_species',
-                  cage_id: cage.id } }
+      before do
+        post '/api/v1/dinosaurs',
+             params: { name: 'invalid_dino',
+                       species: 'unsupported_species',
+                       cage_id: cage.id }
+      end
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -117,7 +119,9 @@ RSpec.describe 'Dinosaur specs', type: :request do
 
     context 'when adding a carnivore to a cage with a carnivore of a different species' do
       let!(:cage_for_velociraptor) { Cage.create }
-      let!(:velociraptor) { Dinosaur.create(name: 'sharon', species: 'velociraptor', cage_id: cage_for_velociraptor.id) }
+      let!(:velociraptor) do
+        Dinosaur.create(name: 'sharon', species: 'velociraptor', cage_id: cage_for_velociraptor.id)
+      end
 
       before { put "/api/v1/dinosaurs/#{velociraptor.id}", params: { cage_id: cage.id } }
 

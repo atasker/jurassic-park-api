@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module ExceptionHandler
-
   extend ActiveSupport::Concern
 
   class CustomValidationError < StandardError; end
@@ -20,5 +19,4 @@ module ExceptionHandler
       json_response({ message: e.message }, :internal_server_error)
     end
   end
-
 end

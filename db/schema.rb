@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-ActiveRecord::Schema.define(version: 2021_01_30_181316) do
-
+ActiveRecord::Schema.define(version: 20_210_130_181_316) do
   create_table 'cages', force: :cascade do |t|
     t.integer 'maximum_capacity', default: 5
     t.integer 'power_status', default: 1

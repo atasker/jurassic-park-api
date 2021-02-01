@@ -3,7 +3,7 @@
 module Api
   module V1
     class DinosaursController < ApplicationController
-      before_action :set_dinosaur, only: [:show, :update]
+      before_action :set_dinosaur, only: %i[show update]
 
       def index
         @dinosaurs = Dinosaur.all

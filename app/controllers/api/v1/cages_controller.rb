@@ -3,7 +3,7 @@
 module Api
   module V1
     class CagesController < ApplicationController
-      before_action :set_cage, only: [:show, :update]
+      before_action :set_cage, only: %i[show update]
 
       def index
         @cages = Cage.all
@@ -12,9 +12,9 @@ module Api
 
       def show
         json_response({
-          "cage": @cage,
-          "dinosaurs": @cage.dinosaurs
-        })
+                        "cage": @cage,
+                        "dinosaurs": @cage.dinosaurs
+                      })
       end
 
       def create
@@ -36,7 +36,6 @@ module Api
       def set_cage
         @cage = Cage.find(params[:id])
       end
-
     end
   end
 end
