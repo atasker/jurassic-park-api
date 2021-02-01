@@ -1,0 +1,7 @@
+.DS_Store
+.rspec
+/log
+/tmp
+/public
+/db/*.sqlite3
+.byebug_history
