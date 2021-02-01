@@ -22,6 +22,12 @@ cd jurassic-park-api
 rails db:create db:migrate
 ```
 
+### Populate the database with some seed data:
+
+```
+rails db:seed
+```
+
 ### Your local environment is now setup to use the API on your localhost.
 
 # API Docs
@@ -133,7 +139,7 @@ curl --request POST \
 
 ```
 {
-  "id": 2,
+  "id": 4,
   "maximum_capacity": 5,
   "power_status": "active"
 }
@@ -147,7 +153,7 @@ curl --request POST \
 
 ```lang-bash
 curl --request PUT \
-  --url http://localhost:3000/api/v1/cages/2 \
+  --url http://localhost:3000/api/v1/cages/4 \
   --header 'Content-Type: application/json' \
   --data '{
 	"maximum_capacity": 15,
@@ -235,7 +241,7 @@ curl --request POST \
   --data '{
  "name": "mr rex",
  "species": "tyrannosaurus",
- "cage_id": 1
+ "cage_id": 2
 }'
 ```
 
@@ -261,10 +267,10 @@ curl --request POST \
 
 ```lang-bash
 curl --request PUT \
-  --url http://localhost:3000/api/v1/dinosaurs/2 \
+  --url http://localhost:3000/api/v1/dinosaurs/1 \
   --header 'Content-Type: application/json' \
   --data '{
-	"cage_id": 2
+	"cage_id": 1
 }'
 ```
 
