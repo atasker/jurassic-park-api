@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Cage < ApplicationRecord
   # Default power_status is set to active.
   enum power_status: %i[down active]

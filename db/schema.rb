@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveRecord::Schema.define(version: 2021_01_30_181316) do
 
   create_table 'cages', force: :cascade do |t|
