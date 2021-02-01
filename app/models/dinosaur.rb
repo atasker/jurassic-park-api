@@ -22,7 +22,7 @@ class Dinosaur < ApplicationRecord
   def ensure_active_cage
     cage = Cage.find(self.cage_id)
     if cage.down?
-      raise ExceptionHandler::CustomValidationError, "Cannot be added to cage that is powered down."
+      raise ExceptionHandler::CustomValidationError, 'Cannot be added to cage that is powered down.'
     end
   end
 
@@ -30,7 +30,7 @@ class Dinosaur < ApplicationRecord
     cage = Cage.find(self.cage_id)
     current_inhabitant_count = Dinosaur.where(cage_id: self.cage_id).size
     if cage.maximum_capacity == current_inhabitant_count
-      raise ExceptionHandler::CustomValidationError, "Cage at maximum capacity."
+      raise ExceptionHandler::CustomValidationError, 'Cage at maximum capacity.'
     end
   end
 
@@ -50,12 +50,12 @@ class Dinosaur < ApplicationRecord
       if dinosaur_type == 'herbivore'
         current_types = get_type(current_inhabitants)
         if current_types.include?('carnivore')
-          raise ExceptionHandler::CustomValidationError, "Herbivores cannot be in the same cage as Carnivores."
+          raise ExceptionHandler::CustomValidationError, 'Herbivores cannot be in the same cage as Carnivores.'
         end
       else
         current_unique_species = current_inhabitants.map(&:species).uniq
         if current_unique_species.first != dinosaur_species
-          raise ExceptionHandler::CustomValidationError, "Carnivores can only be in a cage with Dinosaurs of the same species."
+          raise ExceptionHandler::CustomValidationError, 'Carnivores can only be in a cage with Dinosaurs of the same species.'
         end
       end
     end

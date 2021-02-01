@@ -16,7 +16,7 @@ class Cage < ApplicationRecord
 
   def check_for_dinosaurs
     if self.down? && self.dinosaur_count > 0
-      raise ExceptionHandler::CustomValidationError, "Cannot be powered down if cage contains dinosaur(s)."
+      raise ExceptionHandler::CustomValidationError, 'Cannot be powered down if cage contains dinosaur(s).'
     end
   end
 end
