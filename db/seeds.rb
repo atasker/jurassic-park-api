@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 dinosaur_names = %w(jane stacey bob david sharon bill emmett steve joe
                     alan ian christie yvan kristen elliott robbie heidi)
 

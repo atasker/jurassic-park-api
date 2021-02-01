@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Dinosaur < ApplicationRecord
   before_validation :normalize_species
   before_save :ensure_active_cage
